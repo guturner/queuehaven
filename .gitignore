@@ -1,0 +1,11 @@
+target/
+build/
+out/
+node_modules/
+.idea/
+.gradle/
+.DS_Store
+
+*.iml
+
+queuehaven-api/src/main/resources/application.yml
