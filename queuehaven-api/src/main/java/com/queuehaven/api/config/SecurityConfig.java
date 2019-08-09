@@ -28,6 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -36,7 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfigProperties))
                 .addFilterAfter(new JwtAuthenticationFilter(jwtConfigProperties), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.OPTIONS, jwtConfigProperties.getUrl(), "/**").permitAll()
                     .antMatchers(HttpMethod.POST, jwtConfigProperties.getUrl()).permitAll() // Allow un-authenticated access to the auth endpoint
                     .anyRequest().authenticated(); // All other requests must be authenticated
     }

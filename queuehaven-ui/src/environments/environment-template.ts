@@ -7,7 +7,7 @@ export const environment = {
 
   // Matches properties in api application.yml:
   serviceAccount: {
-    username: 'conan@queuehaven.com',
-    password: 'Z9JP9*7L3sYRFBN52a*O1!Wt$ibiLdcF'
+    username: '',
+    password: ''
   }
 };
