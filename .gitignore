@@ -9,3 +9,4 @@ node_modules/
 *.iml
 
 queuehaven-api/src/main/resources/application.yml
+queuehaven-ui/src/environments/environment.ts
