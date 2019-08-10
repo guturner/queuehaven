@@ -9,3 +9,11 @@ security:
     username: <service-account>
     password: <service-password>
     role: SERVICE
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: <db-account>
+      password: <db-password>
