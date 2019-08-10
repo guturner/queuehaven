@@ -15,5 +15,6 @@ spring:
     mongodb:
       host: localhost
       port: 27017
+      authentication-database: admin
       username: <db-account>
       password: <db-password>
