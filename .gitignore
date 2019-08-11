@@ -3,6 +3,7 @@ build/
 out/
 node_modules/
 .idea/
+.vscode/
 .gradle/
 .DS_Store
 

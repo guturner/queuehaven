@@ -4,10 +4,13 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LandingComponent } from './components/landing.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
 
 const routes: Routes =[
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: LandingComponent }
+    { path: '', component: LandingComponent },
+    { path: 'auth', component: AuthComponent }
 ];
 
 @NgModule({
