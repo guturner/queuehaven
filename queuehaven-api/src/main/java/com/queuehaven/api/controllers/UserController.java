@@ -1,10 +1,8 @@
 package com.queuehaven.api.controllers;
 
 import com.queuehaven.api.dtos.UserDTO;
-import com.queuehaven.api.entities.User;
 import com.queuehaven.api.mappers.UserMapper;
 import com.queuehaven.api.repositories.UserRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

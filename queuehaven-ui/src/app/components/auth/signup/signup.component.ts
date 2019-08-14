@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, ValidationErrors, AbstractControl } from '@angular/forms';
+import { UserService } from 'app/services/user.service';
 
 @Component({
     selector: 'app-signup',
@@ -13,7 +14,9 @@ export class SignupComponent implements OnInit {
     isFormValid = false;
     isUsernameTaken = false;
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(
+        private formBuilder: FormBuilder,
+        private userService: UserService) {
         this.createForm();
     }
 
@@ -42,15 +45,26 @@ export class SignupComponent implements OnInit {
     };
 
     isUsernameUnique = (username: string): boolean => {
+        let isUsernameUnique = false;
+
         if (username == null) {
-            return false;
+            isUsernameUnique = false;
+        } else {
+            this.userService.getUserByUsername(username)
+                .then(user => {
+                    isUsernameUnique = user != null;
+                })
+                .catch(error => {
+                    isUsernameUnique = true;
+                });
         }
 
-        
+        return isUsernameUnique;
     };
 
     validateForm = () => {
         this.isFormValid = this.formGroup.valid && this.isUsernameUnique(this.formGroup.get('username').value);
+        console.log(this.isFormValid);
     };
 
     submitForm = () => {

@@ -1,7 +1,7 @@
 <div class="jumbotron">
     <form novalidate [formGroup]="formGroup" (ngSubmit)="submitForm()">
 
-        <div [ngClass]="{ 'form-group' : true, 'has-danger' : formGroup.get('username').touched && formGroup.get('username').invalid }">
+        <div [ngClass]="{ 'form-group' : true, 'has-danger' : formGroup.get('username').touched && (formGroup.get('username').invalid || !isFormValid) }">
             <input type="text" formControlName="username" [ngClass]="{ 'form-control' : true, 'form-control-danger' : formGroup.get('username').touched && formGroup.get('username').invalid }" placeholder="Username">
             <div class="form-control-feedback" *ngIf="formGroup.get('username').errors?.shortUsername != null">Username too short.</div>
         </div>

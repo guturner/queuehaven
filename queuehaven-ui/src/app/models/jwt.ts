@@ -1,5 +1,5 @@
 export class JWT {
-    prefix: String;
-    token: String;
-    expiresIn: Number;
+    prefix: string;
+    token: string;
+    expiresIn: number;
 }
