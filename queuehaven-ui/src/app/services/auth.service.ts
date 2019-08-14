@@ -10,7 +10,7 @@ export class AuthService {
 
     constructor(private http: HttpClient) { }
 
-    login = (): Observable<JWT> => {
+    getJwt = (): Observable<JWT> => {
         let httpHeaders: HttpHeaders = this.generateBasicAuthHeaders(environment.serviceAccount.username, environment.serviceAccount.password);
         let authApiUrl: string = `${environment.baseUrl}${environment.authEndpoint}`;
         

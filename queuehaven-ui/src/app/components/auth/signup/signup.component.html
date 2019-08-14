@@ -1,6 +1,11 @@
-<div class="section">
-    <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+<div class="jumbotron">
+    <form novalidate [formGroup]="formGroup" (ngSubmit)="submitForm()">
 
-        <input type="text" formControlName="username" class="form-control" placeholder="Username">
+        <div [ngClass]="{ 'form-group' : true, 'has-danger' : formGroup.get('username').touched && formGroup.get('username').invalid }">
+            <input type="text" formControlName="username" [ngClass]="{ 'form-control' : true, 'form-control-danger' : formGroup.get('username').touched && formGroup.get('username').invalid }" placeholder="Username">
+            <div class="form-control-feedback" *ngIf="formGroup.get('username').errors?.shortUsername != null">Username too short.</div>
+        </div>
+
+        <button type="submit" class="btn btn-info btn-round">Signup</button>
     </form>
 </div>>

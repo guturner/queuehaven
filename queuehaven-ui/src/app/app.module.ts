@@ -12,6 +12,7 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 
 import { ComponentsModule } from './components/components.module';
 import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 
 
 @NgModule({
@@ -29,7 +30,10 @@ import { AuthService } from './services/auth.service';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

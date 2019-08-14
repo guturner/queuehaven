@@ -5,7 +5,7 @@ public class UserDTO {
     private String username;
 
     public static UserDTO create(String username) {
-        return new UserDTO().setUsername(username);
+        return new UserDTO().setUsername(username.toLowerCase());
     }
 
     public String getUsername() {
@@ -13,7 +13,7 @@ public class UserDTO {
     }
 
     public UserDTO setUsername(String username) {
-        this.username = username;
+        this.username = username.toLowerCase();
         return this;
     }
 

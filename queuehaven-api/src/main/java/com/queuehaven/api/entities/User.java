@@ -11,7 +11,7 @@ public class User {
     private String username;
 
     public static User create(String username) {
-        return new User().setUsername(username);
+        return new User().setUsername(username.toLowerCase());
     }
 
     public String getUsername() {
@@ -19,7 +19,7 @@ public class User {
     }
 
     public User setUsername(String username) {
-        this.username = username;
+        this.username = username.toLowerCase();
         return this;
     }
 
