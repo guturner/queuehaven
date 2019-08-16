@@ -4,6 +4,7 @@ import com.queuehaven.api.dtos.UserDTO;
 import com.queuehaven.api.mappers.UserMapper;
 import com.queuehaven.api.repositories.UserRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +22,7 @@ public class UserController {
     }
 
     @GetMapping("username/{username}")
+    @Secured("ROLE_SERVICE")
     public ResponseEntity getUserByUsername(@PathVariable String username) {
         return userRepository.findByUsername(username.toLowerCase())
                 .map(ResponseEntity::ok)
@@ -28,6 +30,7 @@ public class UserController {
     }
 
     @PostMapping
+    @Secured("ROLE_SERVICE")
     public ResponseEntity createNewUser(@RequestBody UserDTO userDTO) {
         return userMapper.asUser(userDTO)
                 .map(userRepository::save)

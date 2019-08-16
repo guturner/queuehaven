@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { User } from 'app/models/user';
+import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 import { JWT } from 'app/models/jwt';
 
 @Injectable()
@@ -12,23 +13,21 @@ export class UserService {
         private authService: AuthService,
         private http: HttpClient) { }
 
-    async getUserByUsername(username: string): Promise<User> {
-        let token: string;
+    getUserByUsername = (username: string): Observable<User> => {
+        const usersUrl: string = `${environment.baseUrl}/api/v1/users/username/${username}`;
+        return this.http.get<User>(usersUrl, { headers: this.buildApiUserAuthHeader() });
+    };
 
-        await this.authService.getJwt().then(jwt => {
-            token = jwt.token;
-        });
-
-        let httpHeaders: HttpHeaders = this.generateBearerAuthHeaders(token);
-        let usersApiUrl: string = `${environment.baseUrl}api/v1/users/username/${username}`;
-
-        return await this.http.get<User>(usersApiUrl, { headers: httpHeaders }).toPromise();
+    createUser = (user: User) => {
+        const usersUrl: string = `${environment.baseUrl}/api/v1/users`;
+        this.http.post<User>(usersUrl, user, { headers: this.buildApiUserAuthHeader() }).subscribe();
     }
 
-    generateBearerAuthHeaders(jwt: String): HttpHeaders {
-        return new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${jwt}`
-        });
-    }
+    /**
+     * Used for secure operations performed while the user is logged out.
+     */
+    private buildApiUserAuthHeader = (): HttpHeaders => {
+        const jwt: JWT = this.authService.getCurrentApiUserJwt();
+        return new HttpHeaders().set('Authorization', `${jwt.prefix}${jwt.token}`);
+    };
 }
