@@ -1,0 +1,40 @@
+<div class="jumbotron">
+    <p class="lead">Add a Game</p>
+
+    <form novalidate [formGroup]="formGroup" (ngSubmit)="submitForm()">
+
+        <div [ngClass]="{ 'form-group' : true, 'has-danger' : isNameFieldInvalid() }">
+            <label for="name">Name</label>
+            <input type="text" formControlName="name" [ngClass]="{ 'form-control' : true, 'form-control-danger' : isNameFieldInvalid() }">
+        </div>
+
+        <div [ngClass]="{ 'form-group' : true, 'has-danger' : isGenreFieldInvalid() }">
+            <label for="genre">Genre</label>
+            <select formControlName="genre" id="genre" [ngClass]="{ 'form-control' : true, 'form-control-danger' : isGenreFieldInvalid() }" [value]="DEFAULT_GENRE">
+                <option *ngFor="let genre of GENRES">{{genre}}</option>
+            </select>
+        </div>
+
+        <div [ngClass]="{ 'form-group' : true, 'has-danger' : isMinNumOfPlayersFieldInvalid() }">
+            <label for="minNumOfPlayers">Minimum Number Of Players</label>
+            <input type="text" numbersonly formControlName="minNumOfPlayers" id="minNumOfPlayers" [ngClass]="{ 'form-control' : true, 'form-control-danger' : isMinNumOfPlayersFieldInvalid() }">
+        </div>
+
+        <div [ngClass]="{ 'form-group' : true, 'has-danger' : isMaxNumOfPlayersFieldInvalid() }">
+            <label for="maxNumOfPlayers">Maximum Number Of Players</label>
+            <input type="text" numbersonly formControlName="maxNumOfPlayers" id="maxNumOfPlayers" [ngClass]="{ 'form-control' : true, 'form-control-danger' : isMaxNumOfPlayersFieldInvalid() }">
+        </div>
+
+        <div [ngClass]="{ 'form-group' : true, 'has-danger' : isImagePathFieldInvalid() }">
+            <label for="imagePath">Image Path</label>
+            <input type="text" nospaces formControlName="imagePath" id="imagePath" [ngClass]="{ 'form-control' : true, 'form-control-danger' : isImagePathFieldInvalid() }">
+            <div class="form-control-feedback" *ngIf="isImagePathFieldInvalid() && isBadImgPath">Image Path must resolve to a working image.</div>
+        </div>
+
+        <div *ngIf="imagePath != null">
+            <img [src]="imagePath" width=256 height=144 (load)="clearAllImageErrors()" (error)="setBadImageError()" />
+        </div>
+
+        <button type="submit" [disabled]="isFormInvalid()" class="btn btn-info btn-round">Add Game</button>
+    </form>
+</div>

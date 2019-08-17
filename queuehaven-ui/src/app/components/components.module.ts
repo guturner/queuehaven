@@ -14,6 +14,9 @@ import { NoSpacesDirective } from 'app/directives/nospaces.directive';
 import { ProfileComponent } from './profile/profile.component';
 import { NoAuthGuard } from 'app/guards/noauth.guard';
 import { AuthGuard } from 'app/guards/auth.guard';
+import { GamesComponent } from './games/games.component';
+import { AddGameComponent } from './games/add-game/add-game.component';
+import { NumbersOnlyDirective } from 'app/directives/numbersonly.directive';
 
 @NgModule({
     imports: [
@@ -25,12 +28,15 @@ import { AuthGuard } from 'app/guards/auth.guard';
         JwBootstrapSwitchNg2Module
     ],
     declarations: [
+        AddGameComponent,
         AuthComponent,
+        GamesComponent,
         LandingComponent,
         LoginComponent,
         ProfileComponent,
         SignupComponent,
-        NoSpacesDirective
+        NoSpacesDirective,
+        NumbersOnlyDirective
     ],
     providers: [
         AuthGuard,

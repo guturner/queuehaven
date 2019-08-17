@@ -64,6 +64,10 @@ export class NavbarComponent implements OnInit {
         }
     };
 
+    isAdmin = (): boolean => {
+        return true; // TODO
+    };
+
     isLoggedIn = (): boolean => {
         return localStorage.getItem('user') != null;
     };

@@ -26,8 +26,7 @@ export class LoginComponent implements OnInit {
     createForm = () => {
         this.formGroup = this.formBuilder.group({
             'username': [null, Validators.required],
-            'password': ['a', Validators.required],
-            'confirmPassword': ['a', Validators.required]
+            'password': ['a', Validators.required]
         });
     };
 
@@ -36,7 +35,7 @@ export class LoginComponent implements OnInit {
     };
 
     isFormInvalid = (): boolean => {
-        return this.formGroup.get('username').invalid || this.formGroup.get('confirmPassword').invalid;
+        return this.formGroup.get('username').invalid || this.formGroup.get('password').invalid;
     };
 
     redirectToLandingPage = () => {

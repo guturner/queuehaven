@@ -43,7 +43,7 @@ export class AuthService {
                   const jwtKey: string = this.getJwtKey(username);
 
                   if (jwtKey != this.API_JWT_KEY) {
-                    localStorage.setItem(this.USER_KEY, JSON.stringify(new User(username)));
+                    localStorage.setItem(this.USER_KEY, JSON.stringify(new User(username, password)));
                   }
                   localStorage.setItem(jwtKey, JSON.stringify(jwt));
                 }
@@ -53,8 +53,7 @@ export class AuthService {
     };
 
     logout = () => {
-      localStorage.removeItem(this.USER_KEY);
-      localStorage.removeItem(this.JWT_KEY);
+      localStorage.clear();
     };
 
     getCurrentJwt = (): JWT => {

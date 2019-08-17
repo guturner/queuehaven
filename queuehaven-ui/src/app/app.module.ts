@@ -14,6 +14,7 @@ import { ComponentsModule } from './components/components.module';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { JwtInterceptor } from './interceptors/JwtInterceptor';
+import { GameService } from './services/game.service';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { JwtInterceptor } from './interceptors/JwtInterceptor';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 
     AuthService,
+    GameService,
     UserService
   ],
   bootstrap: [AppComponent]
