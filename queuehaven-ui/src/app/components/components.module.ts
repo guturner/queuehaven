@@ -10,6 +10,10 @@ import { LandingComponent } from './landing.component';
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { NoSpacesDirective } from 'app/directives/nospaces.directive';
+import { ProfileComponent } from './profile/profile.component';
+import { NoAuthGuard } from 'app/guards/noauth.guard';
+import { AuthGuard } from 'app/guards/auth.guard';
 
 @NgModule({
     imports: [
@@ -24,7 +28,13 @@ import { SignupComponent } from './auth/signup/signup.component';
         AuthComponent,
         LandingComponent,
         LoginComponent,
-        SignupComponent
+        ProfileComponent,
+        SignupComponent,
+        NoSpacesDirective
+    ],
+    providers: [
+        AuthGuard,
+        NoAuthGuard
     ],
     entryComponents: [ ],
     exports:[ LandingComponent ]

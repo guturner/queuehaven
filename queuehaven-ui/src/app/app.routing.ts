@@ -5,12 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LandingComponent } from './components/landing.component';
 import { AuthComponent } from './components/auth/auth.component';
-import { LoginComponent } from './components/auth/login/login.component';
-import { SignupComponent } from './components/auth/signup/signup.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { NoAuthGuard } from './guards/noauth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes =[
     { path: '', component: LandingComponent },
-    { path: 'auth', component: AuthComponent }
+    { path: 'auth', component: AuthComponent, canActivate: [NoAuthGuard] },
+    { path: 'profiles/:username', component: ProfileComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

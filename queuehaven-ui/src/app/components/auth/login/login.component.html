@@ -1,1 +1,13 @@
-login
+<div class="jumbotron">
+    <p class="lead">Login</p>
+
+    <form novalidate [formGroup]="formGroup" (ngSubmit)="submitForm()">
+
+        <div [ngClass]="{ 'form-group' : true, 'has-danger' : isUsernameFieldInvalid() }">
+            <input type="text" nospaces formControlName="username" [ngClass]="{ 'form-control' : true, 'form-control-danger' : isUsernameFieldInvalid() }" placeholder="Username">
+            <div class="form-control-feedback" *ngIf="isBadLogin">Bad login.</div>
+        </div>
+
+        <button type="submit" [disabled]="isFormInvalid()" class="btn btn-info btn-round">Login</button>
+    </form>
+</div>

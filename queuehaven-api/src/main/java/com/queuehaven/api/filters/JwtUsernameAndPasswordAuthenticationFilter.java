@@ -16,7 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -58,7 +57,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
                 return authenticationManager.authenticate(authToken);
             } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                throw new BasicAuthException(ex.getMessage());
             }
         } else {
             throw new BasicAuthException("Unauthenticated.");
@@ -74,7 +73,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication auth)
-        throws IOException, ServletException {
+        throws IOException {
         Long now = System.currentTimeMillis();
 
         String token = Jwts.builder()
@@ -85,7 +84,6 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                 .setExpiration(new Date(now + jwtConfigProperties.getExpiration() * 1000))
                 .signWith(SignatureAlgorithm.HS512, jwtConfigProperties.getSecret().getBytes())
                 .compact();
-
 
         AuthResponse authResponse = AuthResponse.create()
                 .setPrefix(jwtConfigProperties.getPrefix())

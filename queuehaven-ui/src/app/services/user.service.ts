@@ -20,7 +20,7 @@ export class UserService {
 
     createUser = (user: User) => {
         const usersUrl: string = `${environment.baseUrl}/api/v1/users`;
-        this.http.post<User>(usersUrl, user, { headers: this.buildApiUserAuthHeader() }).subscribe();
+        return this.http.post<User>(usersUrl, user, { headers: this.buildApiUserAuthHeader() });
     }
 
     /**

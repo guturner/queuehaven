@@ -1,6 +1,7 @@
 package com.queuehaven.api.services;
 
 import com.queuehaven.api.config.ServiceAccountConfigProperties;
+import com.queuehaven.api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -19,22 +20,46 @@ import java.util.List;
 @Service
 public class ApiUserService implements UserDetailsService {
 
-    @Autowired
-    BCryptPasswordEncoder encoder;
+    private final BCryptPasswordEncoder encoder;
+    private final ServiceAccountConfigProperties serviceAccountConfigProperties;
+    private final UserRepository userRepository;
 
     @Autowired
-    ServiceAccountConfigProperties serviceAccountConfigProperties;
+    public ApiUserService(
+            BCryptPasswordEncoder encoder,
+            ServiceAccountConfigProperties serviceAccountConfigProperties,
+            UserRepository userRepository) {
+        this.encoder = encoder;
+        this.serviceAccountConfigProperties = serviceAccountConfigProperties;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         if (serviceAccountConfigProperties.getUsername().equals(username)) {
-            List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-                    .commaSeparatedStringToAuthorityList("ROLE_" + serviceAccountConfigProperties.getRole());
+            return buildServiceAccountUser();
+        }
 
-            return new User(serviceAccountConfigProperties.getUsername(), encoder.encode(serviceAccountConfigProperties.getPassword()), grantedAuthorities);
+        boolean userExists = userRepository.findByUsername(username.toLowerCase()).isPresent();
+        if (userExists) {
+            return buildHumanUser(username);
         }
 
         throw new UsernameNotFoundException("username: " + username + " not found.");
+    }
+
+    private User buildServiceAccountUser() {
+        List<GrantedAuthority> grantedAuthorities = AuthorityUtils
+                .commaSeparatedStringToAuthorityList("ROLE_" + serviceAccountConfigProperties.getRole());
+
+        return new User(serviceAccountConfigProperties.getUsername(), encoder.encode(serviceAccountConfigProperties.getPassword()), grantedAuthorities);
+    }
+
+    private User buildHumanUser(String username) {
+        List<GrantedAuthority> grantedAuthorities = AuthorityUtils
+                .commaSeparatedStringToAuthorityList("ROLE_USER");
+
+        return new User(username, encoder.encode("a"), grantedAuthorities);
     }
 }

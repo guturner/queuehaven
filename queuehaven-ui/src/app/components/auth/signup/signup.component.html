@@ -1,8 +1,10 @@
 <div class="jumbotron">
+    <p class="lead">Signup</p>
+
     <form novalidate [formGroup]="formGroup" (ngSubmit)="submitForm()">
 
         <div [ngClass]="{ 'form-group' : true, 'has-danger' : isUsernameFieldInvalid() }">
-            <input type="text" formControlName="username" [ngClass]="{ 'form-control' : true, 'form-control-danger' : isUsernameFieldInvalid() }" placeholder="Username">
+            <input type="text" nospaces formControlName="username" [ngClass]="{ 'form-control' : true, 'form-control-danger' : isUsernameFieldInvalid() }" placeholder="Username">
             <div class="form-control-feedback" *ngIf="isUsernameFieldInvalid() && isBadUsername">Username too short.</div>
             <div class="form-control-feedback" *ngIf="isUsernameFieldInvalid() && isUsernameTaken">Username already taken.</div>
             <div class="form-control-feedback" *ngIf="isUsernameFieldInvalid() && isApiError">Something went wrong.</div>

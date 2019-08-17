@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { AuthService } from 'app/services/auth.service';
 import { Router } from '@angular/router';
+import { JWT } from 'app/models/jwt';
 
 @Component({
     selector: 'app-signup',
@@ -108,12 +109,14 @@ export class SignupComponent implements OnInit {
     };
 
     isFormInvalid = (): boolean => {
-        return this.formGroup.get('username').invalid;
+        return this.formGroup.get('username').invalid || this.formGroup.get('confirmPassword').invalid;
     };
 
     submitForm = () => {
-        this.userService.createUser(this.formGroup.value);
-        this.redirectToLandingPage();
+        this.userService.createUser(this.formGroup.value)
+            .subscribe(() => {
+                this.redirectToLandingPage();
+            });
         
     };
 
@@ -122,10 +125,20 @@ export class SignupComponent implements OnInit {
     };
 
     redirectToLandingPage = () => {
-        this.resetForm();
         this.logoutApiUser();
-        this.router.navigate(["/"])
+        this.loginNewUser()
+            .subscribe(() => {
+                this.resetForm();
+                this.router.navigate(["/"]);
+            });
     }
+
+    loginNewUser = (): Observable<JWT> => {
+        const username: string = this.formGroup.get('username').value;
+        const password: string = this.formGroup.get('password').value;
+    
+        return this.authService.login(username, password);
+    };
 
     /**
      * Service Account validates new sign up requests.

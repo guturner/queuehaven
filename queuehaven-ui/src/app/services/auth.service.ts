@@ -7,22 +7,27 @@ import { map } from 'rxjs/operators';
 import { JWT } from 'app/models/jwt';
 
 import * as moment from 'moment';
+import { User } from 'app/models/user';
 
 @Injectable()
 export class AuthService {
+    private readonly API_JWT_KEY = 'api-jwt';
+    private readonly JWT_KEY = 'jwt';
+    private readonly USER_KEY = 'user';
 
-    constructor(private http: HttpClient) { }
+    constructor(
+      private http: HttpClient) { }
 
     loginApiUser = (): Observable<JWT> => {
       return this.login(environment.serviceAccount.username, environment.serviceAccount.password);
     };
 
     logoutApiUser = () => {
-      localStorage.removeItem('api-jwt');
+      localStorage.removeItem(this.API_JWT_KEY);
     };
 
     getCurrentApiUserJwt = (): JWT => {
-      return JSON.parse(localStorage.getItem('api-jwt'));
+      return JSON.parse(localStorage.getItem(this.API_JWT_KEY));
     }
 
     login = (username: string, password: string): Observable<JWT> => {
@@ -34,7 +39,13 @@ export class AuthService {
               map(jwt => {
                 if (jwt && jwt.token) {
                   jwt.requestedTime = moment();
-                  localStorage.setItem(this.getUserKey(username), JSON.stringify(jwt));
+                  
+                  const jwtKey: string = this.getJwtKey(username);
+
+                  if (jwtKey != this.API_JWT_KEY) {
+                    localStorage.setItem(this.USER_KEY, JSON.stringify(new User(username)));
+                  }
+                  localStorage.setItem(jwtKey, JSON.stringify(jwt));
                 }
                 return jwt;
               })
@@ -42,11 +53,12 @@ export class AuthService {
     };
 
     logout = () => {
-      localStorage.removeItem('jwt');
+      localStorage.removeItem(this.USER_KEY);
+      localStorage.removeItem(this.JWT_KEY);
     };
 
     getCurrentJwt = (): JWT => {
-        return JSON.parse(localStorage.getItem('jwt'));
+        return JSON.parse(localStorage.getItem(this.JWT_KEY));
     };
 
     private generateBasicAuthHeaders = (username: String, password: String): HttpHeaders => {
@@ -58,7 +70,7 @@ export class AuthService {
         });
     };
 
-    private getUserKey = (username?: string): string => {
-      return username == environment.serviceAccount.username ? 'api-jwt' : 'jwt';
+    private getJwtKey = (username?: string): string => {
+      return username == environment.serviceAccount.username ? this.API_JWT_KEY : this.JWT_KEY;
     }
 }
