@@ -1,0 +1,7 @@
+<div class="jumbotron">
+        <p class="lead">Game Library</p>
+
+        <div *ngFor="let game of games$ | async" class="offset">
+            <img [src]="game.imagePath" width=256 height=144 />
+        </div>
+</div>

@@ -17,6 +17,7 @@ import { AuthGuard } from 'app/guards/auth.guard';
 import { GamesComponent } from './games/games.component';
 import { AddGameComponent } from './games/add-game/add-game.component';
 import { NumbersOnlyDirective } from 'app/directives/numbersonly.directive';
+import { ViewGamesComponent } from './games/view-games/view-games.component';
 
 @NgModule({
     imports: [
@@ -35,6 +36,7 @@ import { NumbersOnlyDirective } from 'app/directives/numbersonly.directive';
         LoginComponent,
         ProfileComponent,
         SignupComponent,
+        ViewGamesComponent,
         NoSpacesDirective,
         NumbersOnlyDirective
     ],

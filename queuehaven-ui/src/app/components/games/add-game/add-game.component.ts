@@ -87,7 +87,7 @@ export class AddGameComponent implements OnInit {
     submitForm = () => {
         this.gameService.addGame(this.formGroup.value)
             .subscribe(() => {
-                // TODO reload game library
+                this.gameService.getGames();
                 this.resetForm();
             });
     };
