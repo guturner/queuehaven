@@ -1,0 +1,27 @@
+<div class="container d-flex align-items-center justify-content-center h-100">
+    <div class="row d-flex justify-content-center text-center">
+        <div *ngFor="let queueEntry of queueEntries$ | async" class="col-md-3">
+            <div class="card mr-3">
+                <img class="card-img-top" [src]="getGame(queueEntry.gameId).imagePath" width="640">
+
+                <div class="card-body">
+                    <h4 class="card-title"><a>{{getGame(queueEntry.gameId).name}}</a></h4>
+                </div>
+
+                <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" (click)="removeGameFromQueue(queueEntry.queueEntryId)">Remove From Queue</button>
+            </div>
+        </div>
+
+        <div class="jumbotron col-md-5">
+            <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+                <div class="md-form">
+                    <select id="game" class="browser-default custom-select" formControlName="gameId">
+                        <option *ngFor="let game of games$ | async" [value]="game.gameId">{{game.name}}</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" [disabled]="isFormInvalid()">Add to Queue</button>
+            </form>
+        </div>
+    </div>
+</div>

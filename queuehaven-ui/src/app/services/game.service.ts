@@ -16,6 +16,11 @@ export class GameService {
         return this.http.post<Game>(gamesUrl, game);
     };
 
+    getGame = (gameId: string): Observable<Game> => {
+        const gamesUrl: string = `${environment.baseUrl}/api/v1/games/${gameId}`;
+        return this.http.get<Game>(gamesUrl);
+    };
+
     getGames = (): Subject<Game[]> => {
         const gamesUrl: string = `${environment.baseUrl}/api/v1/games`;
         this.http.get<Game[]>(gamesUrl)

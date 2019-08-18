@@ -33,7 +33,11 @@ export class NavbarComponent implements OnInit {
     };
 
     buildProfileRoute = (): string => {
-        return `/#/profiles/${this.getCurrentUser().username}`;
+        return `/#/profile/${this.getCurrentUser().username}`;
+    };
+
+    buildQueueRoute = (): string => {
+        return `/#/queue/${this.getCurrentUser().username}`;
     };
 
     sidebarOpen = () => {

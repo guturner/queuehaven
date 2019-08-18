@@ -18,6 +18,7 @@ import { GameService } from './services/game.service';
 import { UserService } from './services/user.service';
 
 import { JwtInterceptor } from './interceptors/JwtInterceptor';
+import { QueueService } from './services/queue.service';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { JwtInterceptor } from './interceptors/JwtInterceptor';
 
     AuthService,
     GameService,
+    QueueService,
     UserService
   ],
   bootstrap: [AppComponent]

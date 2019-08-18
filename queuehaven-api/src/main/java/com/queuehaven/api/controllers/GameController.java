@@ -23,6 +23,12 @@ public class GameController {
         this.gameRepository = gameRepository;
     }
 
+    @GetMapping("{gameId}")
+    @Secured("ROLE_USER")
+    public ResponseEntity getGame(@PathVariable String gameId) {
+        return ResponseEntity.ok(gameRepository.findByGameId(gameId));
+    }
+
     @GetMapping
     @Secured("ROLE_USER")
     public ResponseEntity getGames() {
@@ -36,6 +42,5 @@ public class GameController {
                 .map(gameRepository::save)
                 .map(game -> ResponseEntity.status(201).build())
                 .orElse(ResponseEntity.badRequest().build());
-
     }
 }

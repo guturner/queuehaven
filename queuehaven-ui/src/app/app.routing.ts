@@ -10,13 +10,15 @@ import { NoAuthGuard } from './guards/noauth.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { AddGameComponent } from './components/games/add-game/add-game.component';
 import { ViewGamesComponent } from './components/games/view-games/view-games.component';
+import { QueueComponent } from './components/queue/queue.component';
 
 const routes: Routes =[
     { path: '', component: LandingComponent },
-    { path: 'auth', component: AuthComponent, canActivate: [NoAuthGuard] },
-    { path: 'profiles/:username', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'add-game', component: AddGameComponent, canActivate: [AuthGuard] },
-    { path: 'games', component: ViewGamesComponent, canActivate: [AuthGuard] }
+    { path: 'auth', component: AuthComponent, canActivate: [NoAuthGuard] },
+    { path: 'games', component: ViewGamesComponent, canActivate: [AuthGuard] },
+    { path: 'profile/:username', component: ProfileComponent, canActivate: [AuthGuard] },
+    { path: 'queue/:username', component: QueueComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

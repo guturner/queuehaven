@@ -13,13 +13,17 @@
           <a class="nav-link" [href]="buildProfileRoute()">{{getCurrentUser().username}}</a>
         </li>
 
-        <li *ngIf="isLoggedIn() && isAdmin()" class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link" href="/#/add-game">Add a Game</a>
+        <li *ngIf="isLoggedIn()" class="nav-item waves-light" mdbWavesEffect>
+          <a class="nav-link" [href]="buildQueueRoute()">Queue</a>
         </li>
 
         <li *ngIf="isLoggedIn()" class="nav-item waves-light" mdbWavesEffect>
-            <a class="nav-link" href="/#/games">View Games Library</a>
-          </li>
+          <a class="nav-link" href="/#/games">View Games Library</a>
+        </li>
+
+        <li *ngIf="isLoggedIn() && isAdmin()" class="nav-item waves-light" mdbWavesEffect>
+          <a class="nav-link" href="/#/add-game">Add a Game</a>
+        </li>
 
         <li *ngIf="isLoggedIn()" class="nav-item waves-light" mdbWavesEffect>
           <a class="nav-link" href="#" (click)="logout()">Logout</a>
