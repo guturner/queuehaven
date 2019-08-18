@@ -1,13 +1,17 @@
-<div class="jumbotron">
-    <p class="lead">Login</p>
+<div class="card">
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Login</strong>
+    </h5>
 
-    <form novalidate [formGroup]="formGroup" (ngSubmit)="submitForm()">
+    <div class="card-body px-lg-5 pt-0">
+        <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+            <div class="md-form">
+                <input type="text" mdbInput nospaces formControlName="username" id="login-username" class="form-control">
+                <label for="login-username">Username</label>
+                <mdb-error *ngIf="isBadLogin">Invalid login.</mdb-error>
+            </div>
 
-        <div [ngClass]="{ 'form-group' : true, 'has-danger' : isUsernameFieldInvalid() }">
-            <input type="text" nospaces formControlName="username" [ngClass]="{ 'form-control' : true, 'form-control-danger' : isUsernameFieldInvalid() }" placeholder="Username">
-            <div class="form-control-feedback" *ngIf="isBadLogin">Bad login.</div>
-        </div>
-
-        <button type="submit" [disabled]="isFormInvalid()" class="btn btn-info btn-round">Login</button>
-    </form>
+            <button [disabled]="isFormInvalid()" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Login</button>
+        </form>
+    </div>
 </div>

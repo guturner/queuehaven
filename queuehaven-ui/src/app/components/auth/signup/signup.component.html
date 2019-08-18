@@ -1,15 +1,19 @@
-<div class="jumbotron">
-    <p class="lead">Signup</p>
+<div class="card">
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Signup</strong>
+    </h5>
 
-    <form novalidate [formGroup]="formGroup" (ngSubmit)="submitForm()">
+    <div class="card-body px-lg-5 pt-0">
+        <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+            <div class="md-form">
+                <input type="text" mdbInput mbdValidate nospaces formControlName="username" id="signup-username" class="form-control">
+                <label for="signup-username">Username</label>
+                <mdb-error *ngIf="isUsernameFieldInvalid() && isBadUsername">Username too short.</mdb-error>
+                <mdb-error *ngIf="isUsernameFieldInvalid() && isUsernameTaken">Username already taken.</mdb-error>
+                <mdb-error *ngIf="isUsernameFieldInvalid() && isApiError">Something went wrong.</mdb-error>
+            </div>
 
-        <div [ngClass]="{ 'form-group' : true, 'has-danger' : isUsernameFieldInvalid() }">
-            <input type="text" nospaces formControlName="username" [ngClass]="{ 'form-control' : true, 'form-control-danger' : isUsernameFieldInvalid() }" placeholder="Username">
-            <div class="form-control-feedback" *ngIf="isUsernameFieldInvalid() && isBadUsername">Username too short.</div>
-            <div class="form-control-feedback" *ngIf="isUsernameFieldInvalid() && isUsernameTaken">Username already taken.</div>
-            <div class="form-control-feedback" *ngIf="isUsernameFieldInvalid() && isApiError">Something went wrong.</div>
-        </div>
-
-        <button type="submit" [disabled]="isFormInvalid()" class="btn btn-info btn-round">Signup</button>
-    </form>
+            <button [disabled]="isFormInvalid()" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Signup</button>
+        </form>
+    </div>
 </div>

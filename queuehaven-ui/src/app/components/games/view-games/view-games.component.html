@@ -1,7 +1,16 @@
-<div class="jumbotron">
-        <p class="lead">Game Library</p>
+<div class="container d-flex align-items-center justify-content-center h-100">
+    <div class="row d-flex justify-content-center text-center">
+        <div *ngFor="let game of games$ | async" class="col-md-3">
+            <div class="card mr-3">
+                <img class="card-img-top" [src]="game.imagePath" width="640">
 
-        <div *ngFor="let game of games$ | async" class="offset">
-            <img [src]="game.imagePath" width=256 height=144 />
+                <div class="card-body">
+                    <h4 class="card-title"><a>{{game.name}}</a></h4>
+
+                    <p class="card-text">Minimum Number of Players: {{game.minNumOfPlayers}}</p>
+                    <p class="card-text">Maximum Number of Players: {{game.maxNumOfPlayers}}</p>
+                </div>
+            </div>
         </div>
+    </div>
 </div>

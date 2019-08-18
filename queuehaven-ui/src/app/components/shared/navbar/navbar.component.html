@@ -1,4 +1,41 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-transparent" color-on-scroll="500">
+<header class="intro-header">
+  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+    <mdb-navbar-brand>
+      <a class="logo navbar-brand waves-light brand mt-1" mdbWavesEffect href="#"><strong>queuehaven</strong></a>
+    </mdb-navbar-brand>
+    <links>
+      <ul class="navbar-nav ml-auto">
+        <li *ngIf="isLoggedOut()" class="nav-item waves-light" mdbWavesEffect>
+          <a class="nav-link" href="/#/auth">Login / Signup</a>
+        </li>
+
+        <li *ngIf="isLoggedIn()" class="nav-item waves-light" mdbWavesEffect>
+          <a class="nav-link" [href]="buildProfileRoute()">{{getCurrentUser().username}}</a>
+        </li>
+
+        <li *ngIf="isLoggedIn() && isAdmin()" class="nav-item waves-light" mdbWavesEffect>
+          <a class="nav-link" href="/#/add-game">Add a Game</a>
+        </li>
+
+        <li *ngIf="isLoggedIn()" class="nav-item waves-light" mdbWavesEffect>
+            <a class="nav-link" href="/#/games">View Games Library</a>
+          </li>
+
+        <li *ngIf="isLoggedIn()" class="nav-item waves-light" mdbWavesEffect>
+          <a class="nav-link" href="#" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </links>
+  </mdb-navbar>
+
+  <div class="view intro-2">
+      <div class="mask rgba-black-light">
+        <router-outlet></router-outlet>
+      </div>
+  </div>
+</header>
+
+<!-- <nav class="navbar navbar-expand-lg fixed-top navbar-transparent" color-on-scroll="500">
     <div class="container">
         <div class="navbar-translate">
             <a class="navbar-brand" href="#">QueueHaven</a>
@@ -17,4 +54,4 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> -->

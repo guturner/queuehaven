@@ -117,7 +117,6 @@ export class SignupComponent implements OnInit {
             .subscribe(() => {
                 this.redirectToLandingPage();
             });
-        
     };
 
     resetForm = () => {

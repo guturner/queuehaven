@@ -87,13 +87,11 @@ export class AddGameComponent implements OnInit {
     submitForm = () => {
         this.gameService.addGame(this.formGroup.value)
             .subscribe(() => {
-                this.gameService.getGames();
-                this.resetForm();
+                this.redirectToLandingPage();
             });
     };
 
-    resetForm = () => {
-        this.imagePath = null;
-        this.formGroup.reset();
-    };
+    redirectToLandingPage = () => {
+        this.router.navigate(["/"]);
+    }
 }
