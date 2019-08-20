@@ -1,1 +1,12 @@
-<app-navbar></app-navbar>
+<div class="wrapper background-image">
+    <div class="sidebar" data-color="danger">
+        <app-sidenav></app-sidenav>
+        <div class="sidebar-background sidebar-image"></div>
+    </div>
+    <div class="main-panel">
+        <app-navbar></app-navbar>
+        <div class="main-content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

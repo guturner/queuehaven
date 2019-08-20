@@ -21,9 +21,7 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
-              "node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
-              "node_modules/animate.css/animate.css",
+              "src/assets/scss/material-dashboard.scss",
               "src/styles.scss"
             ],
             "scripts": [
@@ -80,9 +78,7 @@
               "node_modules/hammerjs/hammer.min.js"
             ],
             "styles": [
-              "node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
-              "node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
-              "node_modules/animate.css/animate.css",
+              "src/assets/scss/material-dashboard.scss",
               "src/styles.scss"
             ],
             "assets": [

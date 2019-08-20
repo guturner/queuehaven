@@ -8,9 +8,9 @@
             <div class="md-form">
                 <input type="text" mdbInput mbdValidate nospaces formControlName="username" id="signup-username" class="form-control">
                 <label for="signup-username">Username</label>
-                <mdb-error *ngIf="isUsernameFieldInvalid() && isBadUsername">Username too short.</mdb-error>
+                <!-- <mdb-error *ngIf="isUsernameFieldInvalid() && isBadUsername">Username too short.</mdb-error>
                 <mdb-error *ngIf="isUsernameFieldInvalid() && isUsernameTaken">Username already taken.</mdb-error>
-                <mdb-error *ngIf="isUsernameFieldInvalid() && isApiError">Something went wrong.</mdb-error>
+                <mdb-error *ngIf="isUsernameFieldInvalid() && isApiError">Something went wrong.</mdb-error> -->
             </div>
 
             <button [disabled]="isFormInvalid()" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Signup</button>

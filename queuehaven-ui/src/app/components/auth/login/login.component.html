@@ -8,7 +8,7 @@
             <div class="md-form">
                 <input type="text" mdbInput nospaces formControlName="username" id="login-username" class="form-control">
                 <label for="login-username">Username</label>
-                <mdb-error *ngIf="isBadLogin">Invalid login.</mdb-error>
+                <!-- <mdb-error *ngIf="isBadLogin">Invalid login.</mdb-error> -->
             </div>
 
             <button [disabled]="isFormInvalid()" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Login</button>

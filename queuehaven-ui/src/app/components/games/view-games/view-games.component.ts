@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors }
 import { Router } from '@angular/router';
 import { Game } from 'app/models/game';
 import { Observable, Subject } from 'rxjs';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
     selector: 'app-view-games',
@@ -14,6 +15,8 @@ export class ViewGamesComponent implements OnInit {
 
     gamesSubject: Subject<Game[]>;
     games$: Observable<Game[]>;
+
+    displayedColumns: string[] = ['imagePath', 'name', 'minNumOfPlayers', 'maxNumOfPlayers'];
 
     constructor(
         private gameService: GameService) { }

@@ -9,23 +9,15 @@ import { AuthService } from 'app/services/auth.service';
     styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-    private toggleButton: any;
-    private sidebarVisible: boolean;
-
     private currentUser: User;
 
     constructor(
         public location: Location, 
-        private element : ElementRef,
         private authService: AuthService) {
-        this.sidebarVisible = false;
     }
 
     ngOnInit() {
         this.currentUser = this.getCurrentUser();
-
-        const navbar: HTMLElement = this.element.nativeElement;
-        this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
     }
 
     getCurrentUser = (): User => {
@@ -33,43 +25,7 @@ export class NavbarComponent implements OnInit {
     };
 
     buildProfileRoute = (): string => {
-        return `/#/profile/${this.getCurrentUser().username}`;
-    };
-
-    buildQueueRoute = (): string => {
-        return `/#/queue/${this.getCurrentUser().username}`;
-    };
-
-    sidebarOpen = () => {
-        const toggleButton = this.toggleButton;
-        const html = document.getElementsByTagName('html')[0];
-
-        setTimeout(function(){
-            toggleButton.classList.add('toggled');
-        }, 500);
-        html.classList.add('nav-open');
-
-        this.sidebarVisible = true;
-    };
-
-    sidebarClose = () => {
-        const html = document.getElementsByTagName('html')[0];
-
-        this.toggleButton.classList.remove('toggled');
-        this.sidebarVisible = false;
-        html.classList.remove('nav-open');
-    };
-
-    sidebarToggle = () => {
-        if (this.sidebarVisible === false) {
-            this.sidebarOpen();
-        } else {
-            this.sidebarClose();
-        }
-    };
-
-    isAdmin = (): boolean => {
-        return true; // TODO
+        return this.isLoggedIn() ? `/#/profile/${this.getCurrentUser().username}` : '';
     };
 
     isLoggedIn = (): boolean => {

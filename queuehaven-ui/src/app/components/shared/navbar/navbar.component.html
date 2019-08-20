@@ -1,61 +1,28 @@
-<header class="intro-header">
-  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
-    <mdb-navbar-brand>
-      <a class="logo navbar-brand waves-light brand mt-1" mdbWavesEffect href="#"><strong>queuehaven</strong></a>
-    </mdb-navbar-brand>
-    <links>
-      <ul class="navbar-nav ml-auto">
-        <li *ngIf="isLoggedOut()" class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link" href="/#/auth">Login / Signup</a>
-        </li>
-
-        <li *ngIf="isLoggedIn()" class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link" [href]="buildProfileRoute()">{{getCurrentUser().username}}</a>
-        </li>
-
-        <li *ngIf="isLoggedIn()" class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link" [href]="buildQueueRoute()">Queue</a>
-        </li>
-
-        <li *ngIf="isLoggedIn()" class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link" href="/#/games">View Games Library</a>
-        </li>
-
-        <li *ngIf="isLoggedIn() && isAdmin()" class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link" href="/#/add-game">Add a Game</a>
-        </li>
-
-        <li *ngIf="isLoggedIn()" class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link" href="#" (click)="logout()">Logout</a>
-        </li>
-      </ul>
-    </links>
-  </mdb-navbar>
-
-  <div class="view intro-2">
-      <div class="mask rgba-black-light">
-        <router-outlet></router-outlet>
-      </div>
-  </div>
-</header>
-
-<!-- <nav class="navbar navbar-expand-lg fixed-top navbar-transparent" color-on-scroll="500">
-    <div class="container">
-        <div class="navbar-translate">
-            <a class="navbar-brand" href="#">QueueHaven</a>
-            <button class="navbar-toggler navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" (click)="sidebarToggle()">
-                <span class="navbar-toggler-bar"></span>
-                <span class="navbar-toggler-bar"></span>
-                <span class="navbar-toggler-bar"></span>
-            </button>
+<nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <a class="navbar-brand brand" href="#">queuehaven</a>
         </div>
-        <div class="navbar-collapse" id="navbarToggler">
-            <ul class="navbar-nav ml-auto">
-                <li *ngIf="isLoggedOut()" class="nav-item"><a class="nav-link" href="/#/auth">Login / Signup</a></li>
-                <li *ngIf="isLoggedIn()" class="nav-item"><a class="nav-link" [href]="buildProfileRoute()">{{getCurrentUser().username}}</a></li>
-                <li *ngIf="isLoggedIn() && isAdmin()" class="nav-item"><a class="nav-link" href="/#/games">Add Games</a></li>
-                <li *ngIf="isLoggedIn()" class="nav-item"><a class="nav-link" href="#" (click)="logout()">Logout</a></li>
+        <button mat-raised-button class="navbar-toggler" type="button" (click)="sidebarToggle()">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+            <ul class="navbar-nav">
+                <li class="nav-item" *ngIf="isLoggedOut()">
+                    <a class="nav-link" href="/#/auth">Login / Signup</a>
+                </li>
+
+                <li class="nav-item" *ngIf="isLoggedIn()">
+                    <a class="nav-link" [href]="buildProfileRoute()">{{getCurrentUser().username}}</a>
+                </li>
+
+                <li class="nav-item" *ngIf="isLoggedIn()">
+                    <a class="nav-link" href="#" (click)="logout()">Logout</a>
+                </li>
             </ul>
         </div>
     </div>
-</nav> -->
+</nav>

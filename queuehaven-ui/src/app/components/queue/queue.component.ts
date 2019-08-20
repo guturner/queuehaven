@@ -22,6 +22,8 @@ export class QueueComponent implements OnInit {
 
     username: string;
 
+    displayedColumns: string[] = ['imagePath', 'name', 'action'];
+
     constructor(
         private formBuilder: FormBuilder,
         private gameService: GameService,
