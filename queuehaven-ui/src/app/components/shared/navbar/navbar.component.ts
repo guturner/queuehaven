@@ -29,11 +29,11 @@ export class NavbarComponent implements OnInit {
     };
 
     isLoggedIn = (): boolean => {
-        return localStorage.getItem('user') != null;
+        return this.authService.isLoggedIn();
     };
 
     isLoggedOut = (): boolean => {
-        return localStorage.getItem('user') == null;
+        return this.authService.isLoggedOut();
     };
 
     logout = () => {

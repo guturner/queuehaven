@@ -60,6 +60,14 @@ export class AuthService {
         return JSON.parse(localStorage.getItem(this.JWT_KEY));
     };
 
+    isLoggedIn = (): boolean => {
+      return localStorage.getItem('user') != null;
+    };
+
+    isLoggedOut = (): boolean => {
+      return !this.isLoggedIn();
+    };
+
     private generateBasicAuthHeaders = (username: String, password: String): HttpHeaders => {
         let encodedUsernamePassword = btoa(`${username}:${password}`);
         

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'app/models/user';
+import { AuthService } from 'app/services/auth.service';
 
 @Component({
     selector: 'app-sidenav',
@@ -8,9 +9,9 @@ import { User } from 'app/models/user';
 })
 export class SidenavComponent implements OnInit {
 
-    ngOnInit() {
+    constructor(private authService: AuthService) { }
 
-    }
+    ngOnInit() { }
 
     getCurrentUser = (): User => {
         return JSON.parse(localStorage.getItem('user'));
@@ -21,7 +22,7 @@ export class SidenavComponent implements OnInit {
     };
 
     isLoggedIn = (): boolean => {
-        return localStorage.getItem('user') != null;
+        return this.authService.isLoggedIn();
     };
 
     isAdmin = (): boolean => {

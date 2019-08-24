@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FullCalendarModule } from '@fullcalendar/angular';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { LandingComponent } from './landing.component';
@@ -25,10 +26,12 @@ import {
     MatTableModule,
     MatCardModule
   } from '@angular/material';
+import { AddEventComponent } from './events/add-event/add-event.component';
 
 @NgModule({
     imports: [
         CommonModule,
+        FullCalendarModule,
         ReactiveFormsModule,
 
         // Material Modules
@@ -42,6 +45,7 @@ import {
         MatTooltipModule
     ],
     declarations: [
+        AddEventComponent,
         AddGameComponent,
         AuthComponent,
         LandingComponent,

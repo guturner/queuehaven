@@ -18,6 +18,7 @@ import { UserService } from './services/user.service';
 
 import { JwtInterceptor } from './interceptors/JwtInterceptor';
 import { QueueService } from './services/queue.service';
+import { EventService } from './services/event.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { QueueService } from './services/queue.service';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 
     AuthService,
+    EventService,
     GameService,
     QueueService,
     UserService
