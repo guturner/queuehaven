@@ -32,4 +32,8 @@ export class LandingComponent implements OnInit {
     isLoggedOut = (): boolean => {
         return this.authService.isLoggedOut();
     };
+
+    isAdmin = (): boolean => {
+        return true; // TODO
+    };
 }

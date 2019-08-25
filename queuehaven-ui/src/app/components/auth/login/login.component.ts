@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
                     this.redirectToLandingPage()
                 },
                 (error) => {
+                    this.formGroup.get('username').setErrors({ badLogin: true })
                     this.isBadLogin = true;
                 }
             );

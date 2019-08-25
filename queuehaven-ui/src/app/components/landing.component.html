@@ -5,14 +5,27 @@
           <h2 class="white-bold-bordered">Put down the pen and paper and step into the cutting edge world of queue management.</h2>
         </div>
 
-        <div class="jumbotron" *ngIf="isLoggedIn()">
-          <div class="col-lg-6">
-            <full-calendar defaultView="dayGridMonth" [events]="events" [plugins]="calendarPlugins"></full-calendar>
-          </div>
+        <div class="col-lg-6">
+          <div class="card" *ngIf="isLoggedIn()">
+            <h5 class="card-header text-center py-4">
+                <strong>Calendar of Events</strong>
+            </h5>
 
-          <div class="col-lg-6">
-            <app-add-event></app-add-event>
+            <div class="card-body">
+              <full-calendar defaultView="dayGridMonth" [events]="events" [plugins]="calendarPlugins"></full-calendar>
+            </div>
           </div>
+        </div>
+
+        <div class="col-lg-6" *ngIf="isAdmin()">
+          <div class="card" *ngIf="isLoggedIn()">
+            <h5 class="card-header text-center py-4">
+              <strong>Add Events</strong>
+            </h5>
+
+            <div class="card-body">
+              <app-add-event></app-add-event>
+            </div>
         </div>
     </div>
 </div>

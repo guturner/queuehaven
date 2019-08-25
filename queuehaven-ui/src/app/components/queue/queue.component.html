@@ -21,19 +21,21 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
             </table>
         </div>
+
         <div class="col-lg-12">
-            <mat-card>
-                <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
-                    
-                    <mat-form-field>
-                        <mat-select formControlName="gameId">
-                            <mat-option *ngFor="let game of games$ | async" [value]="game.gameId" placeholder="Pick A Game">{{game.name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-    
-                    <button type="submit" class="btn btn-outline-info btn-rounded btn-block" [disabled]="isFormInvalid()">Add to Queue</button>
-                </form>
-            </mat-card>
+            <div class="card">
+                <div class="card-body text-center py-4">
+                    <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+                        <mat-form-field>
+                            <mat-select formControlName="gameId" placeholder="Pick A Game">
+                                <mat-option *ngFor="let game of games$ | async" [value]="game.gameId">{{game.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+        
+                        <button type="submit" class="btn btn-outline-info btn-rounded" [disabled]="isFormInvalid()">Add to Queue</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,43 +1,39 @@
-<div class="container-fluid d-flex align-items-center justify-content-center h-100">
-    <div class="row d-flex justify-content-center text-center">
+<div class="container-fluid d-flex justify-content-center">
+    <div class="row">
         <div class="card">
-            <h5 class="card-header info-color white-text text-center py-4">
+            <h5 class="card-header text-center py-4">
                 <strong>Add a Game</strong>
             </h5>
         
-            <div class="card-body px-lg-5 pt-0">
+            <div class="card-body">
                 <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
-                    <div class="md-form">
-                        <input type="text" mdbInput mdbValidate formControlName="name" id="game-name" class="form-control">
-                        <label for="game-name">Game Name</label>
-                    </div>
+                    <mat-form-field>
+                        <input matInput formControlName="name" placeholder="Game Name">
+                    </mat-form-field>
 
-                    <div class="md-form">
-                        <select formControlName="genre" id="genre" class="browser-default custom-select" [value]="DEFAULT_GENRE">
-                            <option *ngFor="let genre of GENRES">{{genre}}</option>
-                        </select>
-                    </div>
+                    <mat-form-field>
+                        <mat-select formControlName="genre" [value]="DEFAULT_GENRE" placeholder="Genre">
+                            <mat-option *ngFor="let genre of GENRES" [value]="genre">{{genre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
-                    <div class="md-form">
-                        <input type="text" mdbInput mdbValidate numbersonly formControlName="minNumOfPlayers" id="game-minNumOfPlayers" class="form-control">
-                        <label for="game-minNumOfPlayers">Min Number of Players</label>
-                    </div>
+                    <mat-form-field>
+                        <input matInput numbersonly formControlName="minNumOfPlayers" placeholder="Min Number of Players">
+                    </mat-form-field>
 
-                    <div class="md-form">
-                        <input type="text" mdbInput mdbValidate numbersonly formControlName="maxNumOfPlayers" id="game-maxNumOfPlayers" class="form-control">
-                        <label for="game-maxNumOfPlayers">Max Number of Players</label>
-                    </div>
+                    <mat-form-field>
+                        <input matInput numbersonly formControlName="maxNumOfPlayers" placeholder="Max Number of Players">
+                    </mat-form-field>
 
-                    <div class="md-form">
-                        <input type="text" mdbInput mdbValidate nospaces formControlName="imagePath" id="game-imagePath" class="form-control">
-                        <label for="game-imagePath">Image Path</label>
-                    </div>
+                    <mat-form-field>
+                        <input matInput nospaces formControlName="imagePath" placeholder="Image Path">
+                    </mat-form-field>
         
                     <div *ngIf="imagePath != null">
                         <img [src]="imagePath" width=256 height=144 (load)="clearAllImageErrors()" (error)="setBadImageError()" />
                     </div>
 
-                    <button [disabled]="isFormInvalid()" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Add Game</button>
+                    <button [disabled]="isFormInvalid()" class="btn btn-outline-info btn-rounded btn-block" type="submit">Add Game</button>
                 </form>
             </div>
         </div>

@@ -1,19 +1,18 @@
 <div class="card">
-    <h5 class="card-header info-color white-text text-center py-4">
+    <h5 class="card-header text-center py-4">
         <strong>Signup</strong>
     </h5>
 
-    <div class="card-body px-lg-5 pt-0">
+    <div class="card-body">
         <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
-            <div class="md-form">
-                <input type="text" mdbInput mbdValidate nospaces formControlName="username" id="signup-username" class="form-control">
-                <label for="signup-username">Username</label>
-                <!-- <mdb-error *ngIf="isUsernameFieldInvalid() && isBadUsername">Username too short.</mdb-error>
-                <mdb-error *ngIf="isUsernameFieldInvalid() && isUsernameTaken">Username already taken.</mdb-error>
-                <mdb-error *ngIf="isUsernameFieldInvalid() && isApiError">Something went wrong.</mdb-error> -->
-            </div>
+            <mat-form-field>
+                <input matInput nospaces formControlName="username" placeholder="Username">
+                <mat-error *ngIf="isUsernameFieldInvalid() && isBadUsername">Username too short.</mat-error>
+                <mat-error *ngIf="isUsernameFieldInvalid() && isUsernameTaken">Username already taken.</mat-error>
+                <mat-error *ngIf="isUsernameFieldInvalid() && isApiError">Something went wrong.</mat-error>
+            </mat-form-field>
 
-            <button [disabled]="isFormInvalid()" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Signup</button>
+            <button [disabled]="isFormInvalid()" class="btn btn-outline-info btn-rounded" type="submit">Signup</button>
         </form>
     </div>
 </div>

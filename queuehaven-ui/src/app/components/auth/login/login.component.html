@@ -1,17 +1,16 @@
 <div class="card">
-    <h5 class="card-header info-color white-text text-center py-4">
+    <h5 class="card-header text-center py-4">
         <strong>Login</strong>
     </h5>
 
-    <div class="card-body px-lg-5 pt-0">
+    <div class="card-body">
         <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
-            <div class="md-form">
-                <input type="text" mdbInput nospaces formControlName="username" id="login-username" class="form-control">
-                <label for="login-username">Username</label>
-                <!-- <mdb-error *ngIf="isBadLogin">Invalid login.</mdb-error> -->
-            </div>
+            <mat-form-field>
+                <input matInput nospaces formControlName="username" placeholder="Username">
+                <mat-error *ngIf="isBadLogin">Invalid login.</mat-error>
+            </mat-form-field>
 
-            <button [disabled]="isFormInvalid()" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Login</button>
+            <button [disabled]="isFormInvalid()" class="btn btn-outline-info btn-rounded" type="submit">Login</button>
         </form>
     </div>
 </div>
