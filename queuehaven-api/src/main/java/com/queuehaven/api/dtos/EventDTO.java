@@ -6,7 +6,8 @@ public class EventDTO {
     private String title;
     private String createdBy;
     private String userChoosingGame;
-    private String date;
+    private String start;
+    private String end;
 
     public static EventDTO create() {
         return new EventDTO();
@@ -48,12 +49,21 @@ public class EventDTO {
         return this;
     }
 
-    public String getDate() {
-        return date;
+    public String getStart() {
+        return start;
     }
 
-    public EventDTO setDate(String date) {
-        this.date = date;
+    public EventDTO setStart(String start) {
+        this.start = start;
+        return this;
+    }
+
+    public String getEnd() {
+        return end;
+    }
+
+    public EventDTO setEnd(String end) {
+        this.end = end;
         return this;
     }
 
@@ -64,7 +74,8 @@ public class EventDTO {
                 ", title='" + title + '\'' +
                 ", createdBy='" + createdBy + '\'' +
                 ", userChoosingGame='" + userChoosingGame + '\'' +
-                ", date='" + date + '\'' +
+                ", start='" + start + '\'' +
+                ", end='" + end + '\'' +
                 '}';
     }
 }

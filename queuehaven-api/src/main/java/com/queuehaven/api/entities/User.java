@@ -9,6 +9,7 @@ public class User {
 
     private @Id ObjectId mongoId;
     private String username;
+    private String guild;
 
     public static User create(String username) {
         return new User().setUsername(username.toLowerCase());
@@ -23,10 +24,20 @@ public class User {
         return this;
     }
 
+    public String getGuild() {
+        return guild;
+    }
+
+    public User setGuild(String guild) {
+        this.guild = guild;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "username='" + username + '\'' +
+                ", guild='" + guild + '\'' +
                 '}';
     }
 }

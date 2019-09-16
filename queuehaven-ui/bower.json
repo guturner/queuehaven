@@ -1,0 +1,21 @@
+{
+  "name": "queuehaven-ui",
+  "homepage": "queuehaven.com",
+  "authors": [
+    "scruminators2"
+  ],
+  "description": "Sophisticated queue management for all your board game needs.",
+  "main": "dist/index.js",
+  "keywords": [
+    "queue",
+	"board game"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "private": true
+}

@@ -12,7 +12,8 @@ public class Event {
     private String title;
     private String createdBy;
     private String userChoosingGame;
-    private String date;
+    private String start;
+    private String end;
 
     public static Event create() {
         return new Event();
@@ -54,12 +55,21 @@ public class Event {
         return this;
     }
 
-    public String getDate() {
-        return date;
+    public String getStart() {
+        return start;
     }
 
-    public Event setDate(String date) {
-        this.date = date;
+    public Event setStart(String start) {
+        this.start = start;
+        return this;
+    }
+
+    public String getEnd() {
+        return end;
+    }
+
+    public Event setEnd(String end) {
+        this.end = end;
         return this;
     }
 
@@ -70,7 +80,8 @@ public class Event {
                 ", title='" + title + '\'' +
                 ", createdBy='" + createdBy + '\'' +
                 ", userChoosingGame='" + userChoosingGame + '\'' +
-                ", date='" + date + '\'' +
+                ", start='" + start + '\'' +
+                ", end='" + end + '\'' +
                 '}';
     }
 }

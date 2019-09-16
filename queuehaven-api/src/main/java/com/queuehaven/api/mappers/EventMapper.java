@@ -18,7 +18,8 @@ public class EventMapper {
                     .setEventId(eventDTO.getEventId())
                     .setTitle(eventDTO.getTitle())
                     .setUserChoosingGame(eventDTO.getUserChoosingGame())
-                    .setDate(eventDTO.getDate())
+                    .setStart(eventDTO.getStart())
+                    .setEnd(eventDTO.getEnd())
                     .setCreatedBy(eventDTO.getCreatedBy())
             );
         }
@@ -33,7 +34,8 @@ public class EventMapper {
                             .setEventId(event.getEventId())
                             .setTitle(event.getTitle())
                             .setUserChoosingGame(event.getUserChoosingGame())
-                            .setDate(event.getDate())
+                            .setStart(event.getStart())
+                            .setEnd(event.getEnd())
                             .setCreatedBy(event.getCreatedBy())
             );
         }
