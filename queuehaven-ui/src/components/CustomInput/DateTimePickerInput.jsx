@@ -7,28 +7,11 @@ import classNames from "classnames";
 import withStyles from "@material-ui/core/styles/withStyles";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
-import MaskedInput from 'react-text-mask';
+import DateTimePicker from "react-datetime-picker";
 
 import customInputStyle from "assets/jss/material-kit-react/components/customInputStyle.jsx";
 
-function TextMaskCustom(props) {
-  const { inputRef, ...other } = props;
-
-  return (
-    <MaskedInput
-      {...other}
-      ref={ref => {
-        inputRef(ref ? ref.inputElement : null);
-      }}
-      mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-      placeholderChar={'\u2000'}
-      showMask
-    />
-  );
-}
-
-function PhoneNumberInput({ ...props }) {
+function DateTimePickerInput({ ...props }) {
   const {
     classes,
     formControlProps,
@@ -80,14 +63,13 @@ function PhoneNumberInput({ ...props }) {
           {labelText}
         </InputLabel>
       ) : null}
-      <Input
+      <DateTimePicker
         classes={{
           input: inputClasses,
           root: marginTop,
           disabled: classes.disabled,
           underline: underlineClasses
         }}
-        inputComponent={TextMaskCustom}
         id={id}
         {...inputProps}
       />
@@ -95,7 +77,7 @@ function PhoneNumberInput({ ...props }) {
   );
 }
 
-PhoneNumberInput.propTypes = {
+DateTimePickerInput.propTypes = {
   classes: PropTypes.object.isRequired,
   labelText: PropTypes.node,
   labelProps: PropTypes.object,
@@ -108,4 +90,4 @@ PhoneNumberInput.propTypes = {
   white: PropTypes.bool
 };
 
-export default withStyles(customInputStyle)(PhoneNumberInput);
+export default withStyles(customInputStyle)(DateTimePickerInput);

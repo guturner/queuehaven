@@ -15,7 +15,8 @@ public class EventMapper {
         } else {
             return Optional.of(
                 Event.create()
-                    .setEventId(eventDTO.getEventId())
+                    .setId(eventDTO.getId())
+                    .setResourceId(eventDTO.getResourceId())
                     .setTitle(eventDTO.getTitle())
                     .setUserChoosingGame(eventDTO.getUserChoosingGame())
                     .setStart(eventDTO.getStart())
@@ -31,7 +32,8 @@ public class EventMapper {
         } else {
             return Optional.of(
                     EventDTO.create()
-                            .setEventId(event.getEventId())
+                            .setId(event.getId())
+                            .setResourceId(event.getResourceId())
                             .setTitle(event.getTitle())
                             .setUserChoosingGame(event.getUserChoosingGame())
                             .setStart(event.getStart())

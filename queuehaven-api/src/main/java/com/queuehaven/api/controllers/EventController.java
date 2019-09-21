@@ -4,6 +4,7 @@ import com.queuehaven.api.dtos.EventDTO;
 import com.queuehaven.api.entities.Event;
 import com.queuehaven.api.mappers.EventMapper;
 import com.queuehaven.api.repositories.EventRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -33,9 +34,9 @@ public class EventController {
     @PostMapping
     @Secured("ROLE_USER")
     public ResponseEntity createNewEvent(@RequestBody EventDTO eventDTO) {
-        return eventMapper.asEvent(eventDTO.setEventId(UUID.randomUUID().toString()))
+        return eventMapper.asEvent(eventDTO.setId(UUID.randomUUID().toString()))
                 .map(eventRepository::save)
-                .map(event -> ResponseEntity.status(201).build())
+                .map(event -> ResponseEntity.status(HttpStatus.CREATED).body(eventDTO))
                 .orElse(ResponseEntity.badRequest().build());
     }
 

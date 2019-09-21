@@ -8,7 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Event {
 
     private @Id ObjectId mongoId;
-    private String eventId;
+    private String id;
+    private String resourceId;
     private String title;
     private String createdBy;
     private String userChoosingGame;
@@ -19,12 +20,21 @@ public class Event {
         return new Event();
     }
 
-    public String getEventId() {
-        return eventId;
+    public String getId() {
+        return id;
     }
 
-    public Event setEventId(String eventId) {
-        this.eventId = eventId;
+    public Event setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getResourceId() {
+        return resourceId;
+    }
+
+    public Event setResourceId(String resourceId) {
+        this.resourceId = resourceId;
         return this;
     }
 
@@ -76,7 +86,8 @@ public class Event {
     @Override
     public String toString() {
         return "Event{" +
-                "eventId='" + eventId + '\'' +
+                "id='" + id + '\'' +
+                ", resourceId='" + resourceId + '\'' +
                 ", title='" + title + '\'' +
                 ", createdBy='" + createdBy + '\'' +
                 ", userChoosingGame='" + userChoosingGame + '\'' +

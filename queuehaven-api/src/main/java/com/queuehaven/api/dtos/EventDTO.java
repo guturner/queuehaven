@@ -2,7 +2,8 @@ package com.queuehaven.api.dtos;
 
 public class EventDTO {
 
-    private String eventId;
+    private String id;
+    private String resourceId = "0";
     private String title;
     private String createdBy;
     private String userChoosingGame;
@@ -13,12 +14,21 @@ public class EventDTO {
         return new EventDTO();
     }
 
-    public String getEventId() {
-        return eventId;
+    public String getId() {
+        return id;
     }
 
-    public EventDTO setEventId(String eventId) {
-        this.eventId = eventId;
+    public EventDTO setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getResourceId() {
+        return resourceId;
+    }
+
+    public EventDTO setResourceId(String resourceId) {
+        this.resourceId = resourceId;
         return this;
     }
 
@@ -70,7 +80,8 @@ public class EventDTO {
     @Override
     public String toString() {
         return "EventDTO{" +
-                "eventId='" + eventId + '\'' +
+                "id='" + id + '\'' +
+                ", resourceId='" + resourceId + '\'' +
                 ", title='" + title + '\'' +
                 ", createdBy='" + createdBy + '\'' +
                 ", userChoosingGame='" + userChoosingGame + '\'' +

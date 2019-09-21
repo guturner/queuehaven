@@ -4,14 +4,13 @@ import store from "../store";
 import axios from "axios";
 
 class AuthService {
+
     constructor() {
         this.baseUrl = process.env.REACT_APP_API_BASE_URL;
         this.authEndpoint = process.env.REACT_APP_API_AUTH_ENDPOINT;
     }
 
     signup = async (username, password, otp): boolean => {
-        let result;
-
         try {
             await this.loginApiUser();
 
@@ -20,7 +19,7 @@ class AuthService {
                 otp: otp
             };
 
-            result = await axios.post(`${this.baseUrl}/api/v1/users`, request, { headers: { "Authorization": await this.getBearerToken() } });
+            const result = await axios.post(`${this.baseUrl}/api/v1/users`, request, { headers: { "Authorization": this.getBearerToken() } });
             await this.login(username, 'a'); // TODO
         } catch (error) {
             await this.logout();
@@ -76,7 +75,7 @@ class AuthService {
         }
     };
 
-    getBearerToken = async () => {
+    getBearerToken = () => {
         const jwt = store.getState().jwt;
 
         let bearerToken;

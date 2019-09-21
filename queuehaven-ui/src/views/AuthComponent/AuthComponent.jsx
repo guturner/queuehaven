@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 import classNames from "classnames";
 import withStyles from "@material-ui/core/styles/withStyles";
 
-import Button from "components/CustomButtons/Button.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
@@ -24,13 +23,8 @@ function mapStateToProps(state) {
 
 class AuthComponent extends React.Component {
 
-    constructor() {
-        super();
-
-    }
-
     render() {
-        const { classes, ...rest } = this.props;
+        const { classes } = this.props;
 
         if (this.props.user !== '') {
             return <Redirect push to="/" />
