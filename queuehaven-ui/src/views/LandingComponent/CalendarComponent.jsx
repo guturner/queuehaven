@@ -44,33 +44,38 @@ class CalendarComponent extends React.Component {
     constructor() {
         super();
 
-        this.eventService = new EventService();
-
         const config = {
             schedulerWidth: "80%"
         };
 
         let schedulerData = new SchedulerData(new moment().format(DATE_FORMAT), ViewTypes.Month, false, false, config);
 
-        this.state = {
-            schedulerView: schedulerData
-        };
-
         schedulerData.setResources([{
             id: '0',
             name: 'Game Night'
         }]);
 
+        this.state = {
+            events: [],
+            schedulerView: schedulerData
+        };
+
+        this.eventService = new EventService();
+        this.loadEvents();
+    }
+
+    loadEvents = () => {
         this.eventService.getEvents()
             .then(result => {
                 this.props.loadEvents(result.data);
-                schedulerData.setEvents(this.props.events);
+                this.setState({ ...this.state, events: result.data});
             });
-    }
+    };
 
     render() {
 
         const { schedulerView } = this.state;
+        schedulerView.setEvents(this.props.events);
 
         return (
         <GridContainer alignItems="center" justify="center">
@@ -91,7 +96,7 @@ class CalendarComponent extends React.Component {
 
      prevClick = (schedulerData)=> {
         schedulerData.prev();
-        schedulerData.setEvents(this.props.events);
+        schedulerData.setEvents(this.state.events);
         this.setState({
             schedulerView: schedulerData
         })
@@ -99,7 +104,7 @@ class CalendarComponent extends React.Component {
 
     nextClick = (schedulerData)=> {
         schedulerData.next();
-        schedulerData.setEvents(this.props.events);
+        schedulerData.setEvents(this.state.events);
         this.setState({
             schedulerView: schedulerData
         })
@@ -107,14 +112,14 @@ class CalendarComponent extends React.Component {
 
     onViewChange = (schedulerData, view) => {
         schedulerData.setViewType(view.viewType, view.showAgenda, view.isEventPerspective);
-        schedulerData.setEvents(this.props.events);
+        schedulerData.setEvents(this.state.events);
         this.setState({
             schedulerView: schedulerData
         })
     };
 
     eventItemClick = (schedulerData, event) => {
-        schedulerData.setEvents(this.props.events);
+        schedulerData.setEvents(this.state.events);
         this.setState({
             schedulerView: schedulerData
         })
@@ -125,7 +130,7 @@ class CalendarComponent extends React.Component {
               buttons: [
                 {
                   label: 'Yes',
-                  onClick: () => this.deleteEvent(schedulerData, event)
+                  onClick: () => this.deleteEvent(event)
                 },
                 {
                   label: 'No',
@@ -135,13 +140,13 @@ class CalendarComponent extends React.Component {
             });
     };
 
-    deleteEvent = (schedulerData, event) => {
+    deleteEvent = (event) => {
         this.eventService.deleteEvent(event.id)
             .then( () => {
                 this.eventService.getEvents()
                     .then(result => {
                         this.props.loadEvents(result.data);
-                        schedulerData.setEvents(this.props.events);
+                        this.setState({ ...this.state, events: result.data });
                     });
             });
     };
