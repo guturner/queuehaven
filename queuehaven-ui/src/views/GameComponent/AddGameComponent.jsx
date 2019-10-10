@@ -13,7 +13,6 @@ import CardBody from 'components/Card/CardBody.jsx';
 import CardHeader from 'components/Card/CardHeader.jsx';
 import CustomInput from 'components/CustomInput/CustomInput.jsx';
 import Danger from 'components/Typography/Danger.jsx';
-import DateTimePickerInput from 'components/CustomInput/DateTimePickerInput.jsx';
 import GridContainer from 'components/Grid/GridContainer.jsx';
 import GridItem from 'components/Grid/GridItem.jsx';
 
