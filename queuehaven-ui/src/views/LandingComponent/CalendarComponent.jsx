@@ -50,10 +50,16 @@ class CalendarComponent extends React.Component {
 
         let schedulerData = new SchedulerData(new moment().format(DATE_FORMAT), ViewTypes.Month, false, false, config);
 
-        schedulerData.setResources([{
-            id: '0',
-            name: 'Game Night'
-        }]);
+        schedulerData.setResources([
+            {
+                id: '0',
+                name: 'Game Night'
+            },
+            {
+                id: '1',
+                name: 'Pathfinder'
+            }
+        ]);
 
         this.state = {
             events: [],
@@ -68,12 +74,11 @@ class CalendarComponent extends React.Component {
         this.eventService.getEvents()
             .then(result => {
                 this.props.loadEvents(result.data);
-                this.setState({ ...this.state, events: result.data});
+                this.setState({ ...this.state, events: result.data });
             });
     };
 
     render() {
-
         const { schedulerView } = this.state;
         schedulerView.setEvents(this.props.events);
 
@@ -87,7 +92,7 @@ class CalendarComponent extends React.Component {
                     onViewChange={this.onViewChange} />
             </GridItem>
 
-            <GridItem xs={6} sm={6} md={6}>
+            <GridItem xs={3} sm={3} md={3}>
                 <AddEventComponent/>
             </GridItem>
         </GridContainer>
@@ -150,8 +155,6 @@ class CalendarComponent extends React.Component {
                     });
             });
     };
-
-
 }
 
 const StatefulCalendarComponent = connect(mapStateToProps, mapDispatchToProps)(CalendarComponent)

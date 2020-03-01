@@ -72,6 +72,8 @@ function DateTimePickerInput({ ...props }) {
         }}
         id={id}
         {...inputProps}
+        clearIcon={null}
+        locale="en-us"
       />
     </FormControl>
   );

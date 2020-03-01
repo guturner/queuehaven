@@ -57,7 +57,11 @@ class LandingComponent extends React.Component {
                             null
                     }
                 </div>
-                <Footer/>
+                {
+                    this.props.user === '' ?
+                        null :
+                        <Footer/>
+                }
             </div>
         );
     }
