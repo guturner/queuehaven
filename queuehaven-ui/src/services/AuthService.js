@@ -10,7 +10,7 @@ class AuthService {
         this.authEndpoint = process.env.REACT_APP_API_AUTH_ENDPOINT;
     }
 
-    signup = async (username, password, otp): boolean => {
+    signup = async (username, password, otp) => {
         try {
             await this.loginApiUser();
 
@@ -30,7 +30,7 @@ class AuthService {
         }
     }
 
-    login = async (username, password): boolean => {
+    login = async (username, password) => {
         let result;
 
          try {

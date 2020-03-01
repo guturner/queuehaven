@@ -93,7 +93,7 @@ class SignUpComponent extends React.Component {
   };
 
   // OTP = One-Time Password
-  isBadOTP = async (): boolean => {
+  isBadOTP = async () => {
     await this.setState({ ...this.state, badOtp: false, badOtpMsg: '' });
     if (this.state.otp.length > 0 && this.state.otp.length < 6) {
       this.setState({ ...this.state, badOtp: true, badOtpMsg: 'Invalid Access Token.' });
@@ -106,7 +106,7 @@ class SignUpComponent extends React.Component {
     }
   };
 
-  isBadPassword = async (): boolean => {
+  isBadPassword = async () => {
       await this.setState({ ...this.state, badPassword: false, badPasswordMsg: '' });
       if (this.state.password.length > 0 && this.state.password.length < 6) {
         this.setState({ ...this.state, badPassword: true, badPasswordMsg: 'Insecure password.' });

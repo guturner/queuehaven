@@ -96,7 +96,7 @@ class AddEventComponent extends React.Component {
         }
     };
 
-    isBadEventTitle = async (): boolean => {
+    isBadEventTitle = async () => {
         await this.setState({...this.state, badEventTitle: false, badEventTitleMsg: ''});
         if (this.state.eventTitle.length < 1) {
             this.setState({...this.state, badEventTitle: true, badEventTitleMsg: 'Invalid event title.'});
@@ -106,7 +106,7 @@ class AddEventComponent extends React.Component {
         }
     };
 
-    isBadEventDate = async (): boolean => {
+    isBadEventDate = async () => {
         await this.setState({...this.state, badEventDate: false, badEventDateMsg: ''});
         if (this.state.eventDate == null) {
             this.setState({...this.state, badEventDate: true, badEventDateMsg: 'Invalid event date.'});

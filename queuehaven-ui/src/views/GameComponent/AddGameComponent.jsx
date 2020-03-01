@@ -103,7 +103,7 @@ class AddGameComponent extends React.Component {
         }
     };
 
-    isBadName = async (): boolean => {
+    isBadName = async () => {
         await this.setState({...this.state, badName: false, badNameMsg: ''});
         if (this.state.name.length < 1) {
             this.setState({...this.state, badName: true, badNameMsg: 'Name is too short.'});
@@ -113,7 +113,7 @@ class AddGameComponent extends React.Component {
         }
     };
 
-    isBadMinNumOfPlayers = async (): boolean => {
+    isBadMinNumOfPlayers = async () => {
         await this.setState({...this.state, badMinNumOfPlayers: false, badMinNumOfPlayersMsg: ''});
         if (this.state.minNumOfPlayers == null || this.state.minNumOfPlayers < 1) {
             this.setState({...this.state, badMinNumOfPlayers: true, badMinNumOfPlayersMsg: 'Too few players.'});
@@ -123,7 +123,7 @@ class AddGameComponent extends React.Component {
         }
     };
 
-    isBadMaxNumOfPlayers = async (): boolean => {
+    isBadMaxNumOfPlayers = async () => {
         await this.setState({...this.state, badMaxNumOfPlayers: false, badMaxNumOfPlayersMsg: ''});
         if (this.state.maxNumOfPlayers == null || this.state.maxNumOfPlayers < 1) {
             this.setState({...this.state, badMaxNumOfPlayers: true, badMaxNumOfPlayersMsg: 'Too few players.'});
@@ -136,7 +136,7 @@ class AddGameComponent extends React.Component {
         }
     };
 
-    isBadImagePath = async (): boolean => {
+    isBadImagePath = async () => {
         await this.setState({...this.state, badImagePath: false, badImagePathMsg: ''});
         if (this.state.maxNumOfPlayers < 1) {
             this.setState({...this.state, badImagePath: true, badImagePathMsg: 'Invalid image path.'});
