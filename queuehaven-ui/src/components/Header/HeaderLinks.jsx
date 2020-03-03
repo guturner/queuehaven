@@ -47,22 +47,14 @@ class HeaderLinks extends React.Component {
     }
 
     handleSignIn = () => {
-        this.setState({redirect: true, redirectPath: '/auth'}, () => {
-            setTimeout(() => {
-                if (this.mounted) this.setState({redirect: false, redirectPath: ''})
-            }, 0);
-        });
+        if (this.mounted) this.setState({redirect: true, redirectPath: '/auth'})
     }
 
     handleSignOut = () => {
-        this.setState({redirect: true, redirectPath: '/'}, () => {
-            setTimeout(() => {
-                if (this.mounted) {
-                    this.setState({redirect: false, redirectPath: ''});
-                    this.authService.logout();
-                }
-            }, 0);
-        });
+        if (this.mounted) {
+            this.setState({redirect: false, redirectPath: ''});
+            this.authService.logout();
+        }
     }
 
     render() {

@@ -130,8 +130,8 @@ class CalendarComponent extends React.Component {
         })
 
         confirmAlert({
-              title: 'Delete Event?',
-              message: '',
+              title: 'Are you sure?',
+              message: 'Delete Event?',
               buttons: [
                 {
                   label: 'Yes',

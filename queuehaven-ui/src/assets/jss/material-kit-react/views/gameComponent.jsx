@@ -1,6 +1,13 @@
 import { container, title } from "assets/jss/material-kit-react.jsx";
 
 const gameComponent = {
+  boldButton: {
+    color: "#000000",
+    fontWeight: "bold",
+    "&:hover": {
+      color: "#000000"
+    }
+  },
   container: {
     marginBottom: "20px",
     marginTop: "20px",

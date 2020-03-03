@@ -7,6 +7,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import {loadGamesAction} from '../../actions';
 
 import AddGameComponent from 'views/GameComponent/AddGameComponent.jsx';
+import Button from 'components/CustomButtons/Button.jsx';
 import Footer from 'components/Footer/Footer.jsx';
 import GridContainer from 'components/Grid/GridContainer.jsx';
 import GridItem from 'components/Grid/GridItem.jsx';
@@ -63,6 +64,28 @@ class GameComponent extends React.Component {
             });
     };
 
+    deleteGame = (gameName, gameId) => {
+        confirmAlert({
+            title: 'Are you sure?',
+            message: `Delete Game: ${gameName}?`,
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => {
+                    this.gameService.deleteGame(gameId)
+                        .then(result => {
+                            this.loadGames();
+                        })
+                }
+              },
+              {
+                label: 'No',
+                onClick: () => { }
+              }
+            ]
+          });
+    };
+
     render() {
         const {classes} = this.props;
 
@@ -77,8 +100,8 @@ class GameComponent extends React.Component {
 
                 </Parallax>
                 <div className={classNames(classes.main, classes.mainRaised)}>
-                    <GridContainer alignItems="center" justify="center">
-                        <GridItem xs={12} sm={12} md={12}>
+                    <GridContainer alignItems="stretch" justify="center" spacing={40}>
+                        <GridItem xs={12} sm={12} md={6}>
                             <Table className={classNames(classes.container)}>
                                 <TableHead>
                                     <TableRow>
@@ -96,14 +119,14 @@ class GameComponent extends React.Component {
                                             <TableCell align="right">{game.minNumOfPlayers}</TableCell>
                                             <TableCell align="right">{game.maxNumOfPlayers}</TableCell>
                                             <TableCell align="right">{game.genre}</TableCell>
-                                            <TableCell align="right"></TableCell>
+                                            <TableCell align="right"><Button color="primary" onClick={() => this.deleteGame(game.name, game.gameId)} className={classes.boldButton}>Delete</Button></TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>
                             </Table>
                         </GridItem>
 
-                        <GridItem xs={6} sm={6} md={6}>
+                        <GridItem xs={12} sm={12} md={6}>
                             <AddGameComponent/>
                         </GridItem>
                     </GridContainer>

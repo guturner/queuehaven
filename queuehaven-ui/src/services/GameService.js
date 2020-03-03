@@ -15,6 +15,10 @@ class GameService {
     createGame = (game) => {
         return axios.post(`${this.baseUrl}/api/v1/games`, game, { headers: { "Authorization": this.authService.getBearerToken() }});
     };
+
+    deleteGame = (gameId) => {
+        return axios.delete(`${this.baseUrl}/api/v1/games/${gameId}`, { headers: { "Authorization": this.authService.getBearerToken() }});
+    };
 }
 
 export default GameService;

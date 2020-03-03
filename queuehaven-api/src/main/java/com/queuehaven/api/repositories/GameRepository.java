@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface GameRepository extends MongoRepository<Game, String> {
 
-    Optional<Game> findByGameId(String gameId);
+    Game findByGameId(String gameId);
 }

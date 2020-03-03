@@ -11,7 +11,7 @@ function rootReducer(state = initialState, action) {
     if (action.type === SIGN_IN) {
         return {...state, jwt: action.user.jwt, user: action.user.user};
     } else if (action.type === SIGN_OUT) {
-        return {...state, jwt: '', user: ''};
+        return {...state, jwt: '', user: '', redirect: true, redirectPath: '/'};
     } else if (action.type === LOAD_EVENTS) {
         return {...state, events: action.events}
     } else if (action.type === ADD_EVENT) {

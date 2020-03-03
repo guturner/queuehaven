@@ -1,6 +1,7 @@
 package com.queuehaven.api.controllers;
 
 import com.queuehaven.api.dtos.GameDTO;
+import com.queuehaven.api.entities.Game;
 import com.queuehaven.api.mappers.GameMapper;
 import com.queuehaven.api.repositories.GameRepository;
 import org.springframework.http.HttpStatus;
@@ -43,5 +44,17 @@ public class GameController {
                 .map(gameRepository::save)
                 .map(game -> ResponseEntity.status(HttpStatus.CREATED).body(gameDTO))
                 .orElse(ResponseEntity.badRequest().build());
+    }
+
+    @DeleteMapping("{gameId}")
+    @Secured("ROLE_USER")
+    public ResponseEntity deleteGame(@PathVariable String gameId) {
+        Game game = gameRepository.findByGameId(gameId);
+        if (game != null) {
+            gameRepository.delete(game);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
