@@ -9,10 +9,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * This service authenticates users of the API.
@@ -20,30 +20,29 @@ import java.util.List;
 @Service
 public class ApiUserService implements UserDetailsService {
 
-    private final BCryptPasswordEncoder encoder;
+    private final AuthService authService;
     private final ServiceAccountConfigProperties serviceAccountConfigProperties;
     private final UserRepository userRepository;
 
     @Autowired
     public ApiUserService(
-            BCryptPasswordEncoder encoder,
+            AuthService authService,
             ServiceAccountConfigProperties serviceAccountConfigProperties,
             UserRepository userRepository) {
-        this.encoder = encoder;
+        this.authService = authService;
         this.serviceAccountConfigProperties = serviceAccountConfigProperties;
         this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         if (serviceAccountConfigProperties.getUsername().equals(username)) {
             return buildServiceAccountUser();
         }
 
-        boolean userExists = userRepository.findByUsername(username.toLowerCase()).isPresent();
-        if (userExists) {
-            return buildHumanUser(username);
+        Optional<com.queuehaven.api.entities.User> userOptional = userRepository.findByUsername(username.toLowerCase());
+        if (userOptional.isPresent()) {
+            return buildHumanUser(userOptional.get());
         }
 
         throw new UsernameNotFoundException("username: " + username + " not found.");
@@ -53,13 +52,13 @@ public class ApiUserService implements UserDetailsService {
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList("ROLE_" + serviceAccountConfigProperties.getRole());
 
-        return new User(serviceAccountConfigProperties.getUsername(), encoder.encode(serviceAccountConfigProperties.getPassword()), grantedAuthorities);
+        return new User(serviceAccountConfigProperties.getUsername(), authService.encodePassword(serviceAccountConfigProperties.getPassword()), grantedAuthorities);
     }
 
-    private User buildHumanUser(String username) {
+    private User buildHumanUser(com.queuehaven.api.entities.User user) {
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList("ROLE_USER");
 
-        return new User(username, encoder.encode("a"), grantedAuthorities);
+        return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 }

@@ -4,9 +4,11 @@ import com.queuehaven.api.dtos.UserDTO;
 import com.queuehaven.api.entities.User;
 import com.queuehaven.api.mappers.UserMapper;
 import com.queuehaven.api.repositories.UserRepository;
+import com.queuehaven.api.services.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -16,12 +18,15 @@ import java.util.Optional;
 @RequestMapping("/api/v1/users")
 public class UserController {
 
+    private final AuthService authService;
     private final UserMapper userMapper;
     private final UserRepository userRepository;
 
     public UserController(
+            AuthService authService,
             UserMapper userMapper,
             UserRepository userRepository) {
+        this.authService = authService;
         this.userMapper = userMapper;
         this.userRepository = userRepository;
     }
@@ -53,6 +58,7 @@ public class UserController {
         }
 
         return userMapper.asUser(userDTO)
+                .map(user -> user.setPassword(authService.encodePassword(userDTO.getPassword())))
                 .map(userRepository::save)
                 .map(user -> ResponseEntity.status(201).build())
                 .orElse(ResponseEntity.badRequest().build());

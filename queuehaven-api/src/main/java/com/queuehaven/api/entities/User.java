@@ -9,10 +9,13 @@ public class User {
 
     private @Id ObjectId mongoId;
     private String username;
+    private String password;
     private String guild;
 
-    public static User create(String username) {
-        return new User().setUsername(username.toLowerCase());
+    public static User create(String username, String password) {
+        return new User()
+                .setUsername(username.toLowerCase())
+                .setPassword(password);
     }
 
     public String getUsername() {
@@ -21,6 +24,15 @@ public class User {
 
     public User setUsername(String username) {
         this.username = username.toLowerCase();
+        return this;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public User setPassword(String password) {
+        this.password = password;
         return this;
     }
 
@@ -37,6 +49,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", guild='" + guild + '\'' +
                 '}';
     }

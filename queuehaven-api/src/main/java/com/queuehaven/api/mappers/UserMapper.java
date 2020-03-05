@@ -13,7 +13,10 @@ public class UserMapper {
         if (userDTO == null) {
             return Optional.empty();
         } else {
-            return Optional.of(User.create(userDTO.getUsername()));
+            return Optional.of(
+                    User.create(userDTO.getUsername(), userDTO.getPassword())
+                        .setGuild(userDTO.getGuild())
+            );
         }
     }
 
@@ -21,7 +24,10 @@ public class UserMapper {
         if (user == null) {
             return Optional.empty();
         } else {
-            return Optional.of(UserDTO.create(user.getUsername()));
+            return Optional.of(
+                    UserDTO.create(user.getUsername(), user.getPassword())
+                        .setGuild(user.getGuild())
+            );
         }
     }
 }

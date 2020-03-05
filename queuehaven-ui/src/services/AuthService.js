@@ -16,11 +16,12 @@ class AuthService {
 
             const request = {
                 username: username,
+                password: password,
                 otp: otp
             };
 
-            const result = await axios.post(`${this.baseUrl}/api/v1/users`, request, { headers: { "Authorization": this.getBearerToken() } });
-            await this.login(username, 'a'); // TODO
+            await axios.post(`${this.baseUrl}/api/v1/users`, request, { headers: { "Authorization": this.getBearerToken() } });
+            await this.login(username, password);
         } catch (error) {
             await this.logout();
 

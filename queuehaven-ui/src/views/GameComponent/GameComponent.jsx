@@ -89,7 +89,7 @@ class GameComponent extends React.Component {
     render() {
         const {classes} = this.props;
 
-        if (this.props.user == '') {
+        if (this.props.user === '') {
             return <Redirect push to="/"/>;
         }
 

@@ -75,7 +75,6 @@ class AddGameComponent extends React.Component {
     onSubmit = async (event) => {
         event.preventDefault();
 
-        const {name, genre, minNumOfPlayers, maxNumOfPlayers, imagePath} = this.state;
         this.setState({
             ...this.state,
             badName: false,

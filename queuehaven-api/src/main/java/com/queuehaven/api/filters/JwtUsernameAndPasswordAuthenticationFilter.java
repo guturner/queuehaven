@@ -4,6 +4,7 @@ import com.queuehaven.api.config.JwtConfigProperties;
 import com.queuehaven.api.dtos.AuthResponse;
 import com.queuehaven.api.dtos.UserCredentials;
 import com.queuehaven.api.exceptions.BasicAuthException;
+import com.queuehaven.api.services.AuthService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.http.MediaType;

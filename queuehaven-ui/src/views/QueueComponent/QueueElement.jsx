@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import withStyles from '@material-ui/core/styles/withStyles';
 import flow from 'lodash/flow';
 
 import { DragSource, DropTarget } from 'react-dnd';
@@ -8,8 +6,6 @@ import { PropTypes } from 'prop-types';
 import Card from 'components/Card/Card.jsx';
 import CardBody from 'components/Card/CardBody.jsx';
 import CardHeader from 'components/Card/CardHeader.jsx';
-
-import basicsStyle from 'assets/jss/material-kit-react/views/componentsSections/basicsStyle.jsx';
 
 class QueueElement extends Component {
 
